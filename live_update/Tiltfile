@@ -1,0 +1,17 @@
+local_resource(
+    'make it go',
+    'date +%s%N > start-time.txt',
+)
+
+k8s_yaml('kubernetes.yaml')
+docker_build('example-python-image', '.',
+    live_update=[
+        sync('.', '/app'),
+        run('cd /app && pip install -r requirements.txt', trigger='/app/requirements.txt'),
+
+        # if all that changed was start-time.txt, make sure the server reloads
+        # so that it will reflect the new startup time
+        run('touch /app/app.py', trigger='start-time.txt')
+    ])
+k8s_resource('example-python', port_forwards=5000)
+
