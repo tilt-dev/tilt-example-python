@@ -1,3 +1,5 @@
+# -*- mode: Python -*-
+
 local_resource(
     'make it go',
     'date +%s%N > start-time.txt',
