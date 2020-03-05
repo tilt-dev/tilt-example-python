@@ -1,22 +1,27 @@
-# -*- mode: Python -*-
+# -*- mode: Python -*
 
+k8s_yaml('kubernetes.yaml')
+k8s_resource('example-python', port_forwards=5000, resource_deps=['deploy'])
+
+# Records the current time, then kicks off a server update.
+# Normally, you would let Tilt do deploys automatically, but this
+# shows you how to set up a custom workflow that measures it.
 local_resource(
     'deploy',
     'date +%s%N > start-time.txt',
 )
 
-k8s_yaml('kubernetes.yaml')
-docker_build('example-python-image', '.',
-    live_update=[
-        sync('.', '/app'),
-        run('cd /app && pip install -r requirements.txt', trigger='/app/requirements.txt'),
+# Add a live_update rule to our docker_build
+congrats = "🎉 Congrats, you ran a live_update! 🎉"
+docker_build('example-python-image', '.', live_update=[
+    sync('.', '/app'),
+    run('cd /app && pip install -r requirements.txt', trigger='/app/requirements.txt'),
 
-        # if all that changed was start-time.txt, make sure the server reloads
-        # so that it will reflect the new startup time
-        run('touch /app/app.py', trigger='start-time.txt'),
+    # if all that changed was start-time.txt, make sure the server
+    # reloads so that it will reflect the new startup time
+    run('touch /app/app.py', trigger='start-time.txt'),
 
-        # run('sed -i "s/Hello cats/🎉 Congrats, you ran a <em>live_update</em>! 🎉" index.html'),
-        run('sed -i "s/Hello cats!/🎉 Congrats, you ran a live_update! 🎉/g" /app/templates/index.html'),
-    ])
-k8s_resource('example-python', port_forwards=5000, resource_deps=['deploy'])
+    # add a congrats message!
+    run('sed -i "s/Hello cats!/{}/g" /app/templates/index.html'.format(congrats)),
+])
 
