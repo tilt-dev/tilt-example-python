@@ -1,7 +1,7 @@
 # -*- mode: Python -*-
 
 local_resource(
-    'make it go',
+    'deploy',
     'date +%s%N > start-time.txt',
 )
 
@@ -13,7 +13,10 @@ docker_build('example-python-image', '.',
 
         # if all that changed was start-time.txt, make sure the server reloads
         # so that it will reflect the new startup time
-        run('touch /app/app.py', trigger='start-time.txt')
+        run('touch /app/app.py', trigger='start-time.txt'),
+
+        # run('sed -i "s/Hello cats/🎉 Congrats, you ran a <em>live_update</em>! 🎉" index.html'),
+        run('sed -i "s/Hello cats!/🎉 Congrats, you ran a live_update! 🎉/g" /app/templates/index.html'),
     ])
-k8s_resource('example-python', port_forwards=5000)
+k8s_resource('example-python', port_forwards=5000, resource_deps=['deploy'])
 
