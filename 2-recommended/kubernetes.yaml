@@ -17,4 +17,4 @@ spec:
         - name: example-python
           image: example-python-image
           ports:
-            - containerPort: 5000
+            - containerPort: 8000

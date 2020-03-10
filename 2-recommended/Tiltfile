@@ -1,7 +1,7 @@
 # -*- mode: Python -*
 
 k8s_yaml('kubernetes.yaml')
-k8s_resource('example-python', port_forwards=5000, resource_deps=['deploy'])
+k8s_resource('example-python', port_forwards=8000, resource_deps=['deploy'])
 
 # Records the current time, then kicks off a server update.
 # Normally, you would let Tilt do deploys automatically, but this

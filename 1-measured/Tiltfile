@@ -10,4 +10,4 @@ local_resource(
 
 docker_build('example-python-image', '.')
 k8s_yaml('kubernetes.yaml')
-k8s_resource('example-python', port_forwards=5000, resource_deps=['deploy'])
+k8s_resource('example-python', port_forwards=8000, resource_deps=['deploy'])
