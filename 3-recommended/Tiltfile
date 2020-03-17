@@ -1,7 +1,8 @@
 # -*- mode: Python -*
 
 k8s_yaml('kubernetes.yaml')
-k8s_resource('example-python', port_forwards=8000, resource_deps=['deploy'])
+k8s_resource('example-python', port_forwards=8000,
+             resource_deps=['deploy'])
 
 # Records the current time, then kicks off a server update.
 # Normally, you would let Tilt do deploys automatically, but this
@@ -15,7 +16,8 @@ local_resource(
 congrats = "🎉 Congrats, you ran a live_update! 🎉"
 docker_build('example-python-image', '.', live_update=[
     sync('.', '/app'),
-    run('cd /app && pip install -r requirements.txt', trigger='./requirements.txt'),
+    run('cd /app && pip install -r requirements.txt',
+        trigger='./requirements.txt'),
 
     # if all that changed was start-time.txt, make sure the server
     # reloads so that it will reflect the new startup time
