@@ -14,16 +14,18 @@ local_resource(
 
 # Add a live_update rule to our docker_build
 congrats = "🎉 Congrats, you ran a live_update! 🎉"
-docker_build('example-python-image', '.', live_update=[
-    sync('.', '/app'),
-    run('cd /app && pip install -r requirements.txt',
-        trigger='./requirements.txt'),
+docker_build('example-python-image', '.', build_args={'flask_env': 'development'},
+    live_update=[
+        sync('.', '/app'),
+        run('cd /app && pip install -r requirements.txt',
+            trigger='./requirements.txt'),
 
-    # if all that changed was start-time.txt, make sure the server
-    # reloads so that it will reflect the new startup time
-    run('touch /app/app.py', trigger='./start-time.txt'),
+        # if all that changed was start-time.txt, make sure the server
+        # reloads so that it will reflect the new startup time
+        run('touch /app/app.py', trigger='./start-time.txt'),
 
-    # add a congrats message!
-    run('sed -i "s/Hello cats!/{}/g" /app/templates/index.html'.format(congrats)),
+        # add a congrats message!
+        run('sed -i "s/Hello cats!/{}/g" /app/templates/index.html'.
+            format(congrats)),
 ])
 
