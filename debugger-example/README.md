@@ -4,7 +4,7 @@ This directory contains an example of how to wire your app for use with [`remote
 
 To see `remote-pdb` in action:
 
-1. Clone this repo and call `tilt up` to run the app
+1. Call `tilt up` from this directory
 2. Hit `localhost:8000`; the request will hang because the app hit a breakpoint
 3. In a separate terminal window, open a TCP connection to `localhost:5555`, e.g. via Netcat: `nc 127.0.0.1 5555`
 4. Congrats, you've accessed the debugger! Poke around and inspect the system state. Type `c(ontinue)` to resume execution.
