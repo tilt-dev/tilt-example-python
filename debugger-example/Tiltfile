@@ -1,0 +1,16 @@
+# -*- mode: Python -*
+
+k8s_yaml('kubernetes.yaml')
+
+docker_build('example-python-image', '.',
+    live_update=[
+        sync('.', '/app'),
+        run('cd /app && pip install -r requirements.txt',
+            trigger='./requirements.txt'),
+])
+
+k8s_resource('example-python',
+             port_forwards=[
+                            '8000:8000',  # app
+                            '5555:5555',  # debugger
+             ])
