@@ -11,6 +11,6 @@ docker_build('example-python-image', '.',
 
 k8s_resource('example-python',
              port_forwards=[
-                            '8000:8000',  # app
-                            '5555:5555',  # debugger
+                            8000,  # app
+                            5555,  # debugger
              ])
