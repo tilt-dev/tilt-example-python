@@ -12,7 +12,7 @@ This progression of examples shows how to start, and incrementally update your p
 - [3-recommended](3-recommended): use `live_update` for super-fast deploys
 
 ## Other Examples
-- [debugger-example](debugger-example): an example of how to use a remote Python debugger (in this case, `remote-pdb`) with your Tilt workflow
+- [debugger-examples](debugger-examples): examples of how to use remote Python debuggers with your Tilt workflow
 
 ## License
 
