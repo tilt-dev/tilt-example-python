@@ -1,6 +1,6 @@
-# Run with Tilt, Debug with [`remote-pdb`](https://github.com/romanvm/python-web-pdb)
+# Run with Tilt, Debug with [`web-pdb`](https://github.com/romanvm/python-web-pdb)
 
-This directory contains an example of how to wire your app for use with [`remote-pdb`](https://github.com/romanvm/python-web-pdb), which is currently our recommended debugger for use with Tilt + Kubernetes (though of course, you can use any debugger you like, as long as it exposes a port for connection). For more information on using remote debuggers with your Tilt setup, check out [our guide to Python debuggers](https://docs.tilt.dev/debuggers_python.html).
+This directory contains an example of how to wire your app for use with [`web-pdb`](https://github.com/romanvm/python-web-pdb). For more information on using remote debuggers with your Tilt setup, check out [our guide to Python debuggers](https://docs.tilt.dev/debuggers_python.html).
 
 To see `web-pdb` in action:
 
