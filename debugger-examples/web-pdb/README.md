@@ -2,6 +2,8 @@
 
 This directory contains an example of how to wire your app for use with [`web-pdb`](https://github.com/romanvm/python-web-pdb). For more information on using remote debuggers with your Tilt setup, check out [our guide to Python debuggers](https://docs.tilt.dev/debuggers_python.html).
 
+*Note: for best results, use web-pdb >= v1.5.3*
+
 To see `web-pdb` in action:
 
 1. Call `tilt up` from this directory
