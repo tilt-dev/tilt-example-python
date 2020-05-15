@@ -1,6 +1,6 @@
 # tilt-example-python
 
-[![Build Status](https://circleci.com/gh/windmilleng/tilt-example-python/tree/master.svg?style=shield)](https://circleci.com/gh/windmilleng/tilt-example-python)
+[![Build Status](https://circleci.com/gh/tilt-dev/tilt-example-python/tree/master.svg?style=shield)](https://circleci.com/gh/tilt-dev/tilt-example-python)
 
 An example project that demonstrates how to use Tilt to develop on a Python app (built with Flask). Read [doc](https://docs.tilt.dev/example_python.html).
 
