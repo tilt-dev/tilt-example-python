@@ -9,12 +9,12 @@ k8s_resource('example-python', port_forwards=8000,
 # shows you how to set up a custom workflow that measures it.
 local_resource(
     'deploy',
-    'python now.py > start-time.txt',
+    'python3 now.py > start-time.txt',
 )
 
 # Add a live_update rule to our docker_build
 congrats = "🎉 Congrats, you ran a live_update! 🎉"
-docker_build('example-python-image', '.', build_args={'flask_env': 'development'},
+docker_build('example-python-image', '.', build_args={'flask_debug': 'True'},
     live_update=[
         sync('.', '/app'),
         run('cd /app && pip install -r requirements.txt',
@@ -28,4 +28,3 @@ docker_build('example-python-image', '.', build_args={'flask_env': 'development'
         run('sed -i "s/Hello cats!/{}/g" /app/templates/index.html'.
             format(congrats)),
 ])
-
